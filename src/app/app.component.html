@@ -1,70 +1,41 @@
-<form FormGroup="form" novalidate>
+<form [formGroup]="form" class="form" novalidate>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Aberto
+        </mat-panel-title>
+        <mat-panel-description>
+          Clique para definir os horários
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-  <mat-checkbox class="example-margin">Segunda</mat-checkbox>
+
+      <mat-checkbox class="example-margin" (change)="cbChange($event)" >dia </mat-checkbox>
   <mat-form-field>
-    <input type="text" MatInput  FormControlName="Aberturasegunda" placeholder="Abertura">
+    <input type="text" MatInput   formControlName="abertura" placeholder="Abertura">
   </mat-form-field>
   <mat-label>às</mat-label>
   <mat-form-field>
-    <input type="text" MatInput FormControlName="Fechamentosegunda" placeholder="Fechamento">
+    <input type="text" MatInput formControlName="fechamento" placeholder="Fechamento">
   </mat-form-field><br>
 
+
+
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+    </mat-expansion-panel>
+  </mat-accordion>
+  <hr>
   
-  <mat-checkbox class="example-margin">Terça</mat-checkbox>
-  <mat-form-field>
-    <input type="text" MatInput FormControlName="Aberturaterca" placeholder="Abertura">
-  </mat-form-field>
-  <mat-label>às</mat-label>
-  <mat-form-field>
-    <input type="text" MatInput FormControlName="Fechamentoterca" placeholder="Fechamento">
-  </mat-form-field><br>
+  <div *ngFor="let c of dias">
+<app-dia [dia]="c"></app-dia>
 
-  <mat-checkbox class="example-margin">Quarta</mat-checkbox>
-  <mat-form-field>
-    <input type="text" MatInput FormControlName="Aberturaquarta" placeholder="Abertura">
-  </mat-form-field>
-  <mat-label>às</mat-label>
-  <mat-form-field>
-    <input type="text" MatInput FormControlName="Fechamentoquarta" placeholder="Fechamento">
-  </mat-form-field><br>
+  </div>
+  <hr>
+  
 
-  <mat-checkbox class="example-margin">Quinta</mat-checkbox>
-  <mat-form-field>
-    <input type="text" FormControlName="Aberturaquinta" placeholder="Abertura">
-  </mat-form-field>
-  <mat-label>às</mat-label>
-  <mat-form-field>
-    <input type="text" FormControlName="Fechamentoquinta" placeholder="Fechamento">
-  </mat-form-field><br>
-
-  <mat-checkbox class="example-margin">Sexta</mat-checkbox>
-  <mat-form-field>
-    <input type="text" FormControlName="Aberturasexta" placeholder="Abertura">
-  </mat-form-field>
-  <mat-label>às</mat-label>
-  <mat-form-field>
-    <input type="text" FormControlName="Fechamentosexta" placeholder="Fechamento">
-  </mat-form-field><br>
-
-  <mat-checkbox class="example-margin">Sábado</mat-checkbox>
-  <mat-form-field>
-    <input type="text" FormControlName="Aberturasab" placeholder="Abertura">
-  </mat-form-field>
-  <mat-label>às</mat-label>
-  <mat-form-field>
-    <input type="text" FormControlName="Fechamentosab" placeholder="Fechamento">
-  </mat-form-field><br>
-
-  <mat-checkbox class="example-margin">Domingo</mat-checkbox>
-  <mat-form-field>
-    <input type="text" FormControlName="Aberturadom" placeholder="Abertura">
-  </mat-form-field>
-  <mat-label>às</mat-label>
-  <mat-form-field>
-    <input type="text" FormControlName="Fechamentodom" placeholder="Fechamento">
-  </mat-form-field><br>
-
-  <button type="submit" mat-raised-button   >Enviar</button>
+  <button mat-raised-button color="primary" type="submit" >Enviar</button>
 
 </form>
-
