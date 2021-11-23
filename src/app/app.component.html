@@ -1,40 +1,20 @@
-<form [formGroup]="form" class="form" novalidate>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Aberto
-        </mat-panel-title>
-        <mat-panel-description>
-          Clique para definir os horários
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-
-      <mat-checkbox class="example-margin" (change)="cbChange($event)" >dia </mat-checkbox>
-  <mat-form-field>
-    <input type="text" MatInput   formControlName="abertura" placeholder="Abertura">
-  </mat-form-field>
-  <mat-label>às</mat-label>
-  <mat-form-field>
-    <input type="text" MatInput formControlName="fechamento" placeholder="Fechamento">
-  </mat-form-field><br>
-
-
-
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-    </mat-expansion-panel>
-  </mat-accordion>
-  <hr>
+<form [formGroup]="form" novalidate>
   
-  <div *ngFor="let c of dias">
-<app-dia [dia]="c"></app-dia>
-
+  <mat-checkbox formControlName="aberto" (change)="onSelected($event)">
+      Aberto!
+  </mat-checkbox><br>
+  <div *ngIf="form.get('aberto').value" >
+      <mat-form-field >
+        <input type="text" MatInput   formControlName="abertura"  placeholder="Abertura">
+        
+      </mat-form-field>
+      <mat-label>às</mat-label>
+      <mat-form-field>
+        <input type="text" MatInput formControlName="fechamento" placeholder="Fechamento">
+        
+      </mat-form-field><br>
   </div>
-  <hr>
-  
+        <hr> 
 
   <button mat-raised-button color="primary" type="submit" >Enviar</button>
 

@@ -1,7 +1,8 @@
-import { DirectiveAst } from '@angular/compiler';
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Dia } from './dia.model';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+
+
 
 @Component({
   selector: 'app-root',
@@ -10,43 +11,29 @@ import { Dia } from './dia.model';
 })
 export class AppComponent implements OnInit {
   
+  form: FormGroup | any;
+
   
-
-  panelOpenState = false;
-  selectDisabled = false;
-
-  dias: Dia[];
-
-  form: FormGroup;
+  aberto: boolean = false;
+  
   constructor(private formBuilder: FormBuilder ) {
     this.form = this.formBuilder.group({
+      aberto: [],
       abertura: [""],
       fechamento: [""]
-   });
-
-   this.dias = [
-     {id:1, name: "Domingo"},
-     {id:2, name: "Segunda"},
-     {id:3, name: "Terça"},
-     {id:4, name: "Quarta"},
-     {id:5, name: "Quinta"},
-     {id:6, name: "Sexta"},
-     {id:7, name: "Sábado"}
-   ];
+    });
+    
   } 
 
   ngOnInit(){
+    
+  }
 
-
-  
-  
-  
-}
-
-cbChange(event: any){
-   console.log(event.checked);
-   this.selectDisabled = event.checked;
-     
-   } 
-     
+  onSelected(event: MatCheckboxChange) { 
+    // Se desmarcar o dia
+    if (!event.checked) {
+      this.form.reset();
+      this.form.get("aberto").patchValue(false);
+    };
+  }
 }
